@@ -33,3 +33,12 @@ export const destructuringUserData = (data) => {
 
 //esta funcion abstrae la info y se puede volver a reutilizar tantas veces sea necesaria la info
 // retorna un arreglo un objeto con toda las propieddes y el email y password por separado
+
+
+export const normalizeUserData = (email, password, ...generalData) => {
+    return {
+        email,
+        password,
+        ...generalData
+    };
+};
