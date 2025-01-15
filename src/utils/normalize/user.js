@@ -35,6 +35,20 @@ export const destructuringUserData = (data) => {
 // retorna un arreglo un objeto con toda las propieddes y el email y password por separado
 
 
+export const normalizeUserData = (email, password, generalData = {}) => { //se convierte en objeto con valor default vacio de base y ahi se puede aplicar el rest operator
+    return {
+        email,
+        password,
+        ...generalData
+    };
+};
+
+//rest operator data se convierte en array , al tener que guardarlo como objeto, en esta forma se guarda datos pero sin propiedades, se mete array dentro de propiedad de objeto y eso no funciona alcargar
+
+//no va a tener estructura del modelo
+
+
+/*
 export const normalizeUserData = (email, password, ...generalData) => {
     return {
         email,
@@ -42,3 +56,4 @@ export const normalizeUserData = (email, password, ...generalData) => {
         ...generalData
     };
 };
+*/ 

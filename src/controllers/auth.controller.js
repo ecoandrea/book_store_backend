@@ -12,17 +12,19 @@ export const register = async(req, res, next) => {
         validatePassword(password, userGeneralData.fecha_nacimiento);
 
         const hashedPassword = await hashPassword(password);
+        const userData = normalizeUserData(email, hashedPassword, userGeneralData);
 
-        
+
+        /*
         const userData = {
             ...userGeneralData,
             email,
             password: hashedPassword
             }
 
+        */
         
         
-        //const userData = normalizeUserData(email, hashedPassword, ...userGeneralData);
 
         const user = await Usuario.create(userData);
         
