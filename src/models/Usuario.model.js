@@ -81,7 +81,7 @@ export const initUsuario = (dbConfig) => {
             admin: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false,
-                defaultValue: false
+              
             },
             fecha_nacimiento:{
                 type: DataTypes.DATEONLY,
