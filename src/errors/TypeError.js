@@ -13,6 +13,16 @@ export class NotFound extends CustomError {
     }
 }
 
+export class UploadFileError extends CustomError {
+    constructor(message, statusCode, details) {
+        super(
+            message || 'Error al subir el archivo al servidor',
+            statusCode || 500,
+            details
+        );
+    }
+}
+
 export class DataBaseError extends CustomError {
     constructor(message, statusCode, details) {
         super(
@@ -22,6 +32,27 @@ export class DataBaseError extends CustomError {
         );
     }
 }
+
+export class AuthError extends CustomError {
+    constructor(message, statusCode, details) {
+        super(
+            message || 'Error en el proceso de autenticación',
+            statusCode || 500,
+            details
+        );
+    }
+}
+
+export class MailServiceError extends CustomError {
+    constructor(message, statusCode, details) {
+        super(
+            message || 'Error en el servicio de mensajería por correo',
+            statusCode || 500,
+            details
+        );
+    }
+}
+ 
 
 export class InternalServerError extends CustomError {
     constructor(message, statusCode, details) {

@@ -9,57 +9,56 @@ Que no sea tu cumpleaños
 Que no contenga letras consecutivas en secuencia ascendentes
 */
 
-import { ValidateError } from '../../errors/TypeError.js';
-
+import { AuthError, ValidateError } from '../../errors/TypeError.js';
 
 export const validatePassword = (password, birthday) => {
     if(password.length < 8) {
-        throw new ValidateError('La contrasena debe tener al menos 8 caracteres ');
+        throw new ValidateError('La contraseña debe contener al menos 8 caracteres');
     }
 
     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
     if(!passRegex.test(password)) {
-        throw new ValidateError('La contrasena debe cumplir con los requisitos: incluir mayúsculas y minúsculas, un número y un caracter especial');
+        throw new ValidateError('La contraseña debe incluir al menos una mayúscula, una minúscula, un dígito y un carácter especial');
     }
 
-    if(birthday && password.includes(birthday))
-        throw new ValidateError('La contrasena no debe contener tu cumpleaños');
+    if(birthday && password.includes(birthday)) {
+        throw new ValidateError('La contraseña no puede contener tu cumpleaños');
+    }
 
     const digitChain = password.replace(/\D+/g, '');
 
-    for(let i = 0; i < digitChain.lenght - 2; i++) {
+    for(let i = 0; i < digitChain.length - 2; i++) {
         const digitOne = parseInt(digitChain[i], 10);
-        const digitTwo = parseInt(digitChain[i+1], 10);
-        const digitThree = parseInt(digitChain[i+2], 10);
+        const digitTwo = parseInt(digitChain[i + 1], 10);
+        const digitThree = parseInt(digitChain[i + 2], 10);
 
         //parseInt para convertirlo en numero, se saca primer digito
         //esto es cadena de texto y hay que convertir a numero
         //base 10 porque js  a veces al convertir 0, 1 lo reconoce como truly o falsy
-
-        if (digitOne === digitTwo && digitTwo === digitThree) {
-            throw new ValidateError('La contrasena no debe contener 3 digitos identicos consecutivos');
+        if(digitOne === digitTwo && digitTwo === digitThree) {
+            throw new ValidateError('La contraseña no puede tener 3 dígitos idénticos consecutivos');
         }
 
-        if((digitOne + 1 === digitTwo ) && (digitTwo + 1 === digitThree)) {
-            throw new ValidateError('La contrasena no debe contener 3 digitos consecutivos  ascendentes');
+        if((digitOne + 1 === digitTwo) && (digitTwo + 1 === digitThree)) {
+            throw new ValidateError('La contraseña no puede tener 3 dígitos consecutivos ascendentes');
         }
     }
 
-    const letterChain = password.replace(/[^A-Za-z]+/g, '');
+    const lettersChain = password.replace(/[^A-Za-z]+/g, '');
+    for (let i = 0; i < lettersChain.length - 2; i++) {
+        const letterOne = lettersChain.charCodeAt(i);
+        const letterTwo = lettersChain.charCodeAt(i + 1);
+        const letterThree = lettersChain.charCodeAt(i + 2);
 
-    for(let i = 0; i < letterChain.lenght - 2; i++) {
-        const lettertOne = parseInt(letterChain.charCodeAt[i],);
-        const lettertTwo = parseInt(letterChain.charCodeAt[i+1]);
-        const lettertThree = parseInt(letterChain.charCodeAt[i+2]);
-    
-    
-      
-    
-        if((lettertOne + 1 === lettertTwo ) && (lettertTwo + 1 === lettertThree)) {
-            throw new ValidateError('La contrasena no debe contener 3 letras consecutivos  ascendentes');
+        if((letterOne + 1 === letterTwo) && (letterTwo + 1 === letterThree)) {
+            throw new ValidateError('La contraseña no puede tener 3 letras en secuencia ascendente consecutiva');
         }
     }
 
     return true;
 };
 
+
+export const isNotMatchedPassword = (matchResult) => {
+    if(!matchResult) throw new AuthError('Credenciales inválidas');
+};

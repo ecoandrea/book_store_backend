@@ -6,7 +6,6 @@
  */
 export const destructuringUserData = (data) => {
     const {
-        
         nombre,
         apellido_paterno,
         apellido_materno,
@@ -17,8 +16,6 @@ export const destructuringUserData = (data) => {
         admin
     } = data;
 
-
-
     const globalDataUser = {
         nombre,
         apellido_paterno,
@@ -28,6 +25,7 @@ export const destructuringUserData = (data) => {
         admin
     };
 
+  
     return [globalDataUser, email, password]; //se necesita la info, pero el password se debe aparte ver si es unico , y el password hat que cachearla y transformarla
 };
 
@@ -57,3 +55,16 @@ export const normalizeUserData = (email, password, ...generalData) => {
     };
 };
 */ 
+
+export const normalizeUserPrivateData = (user) => {
+    const { id, nombre, apellido_paterno, apellido_materno, email } = user;
+
+    //se retorna objeto nuevo con datos , que sera una copia del de arriba
+    return {
+        id,
+        nombre,
+        apellido_paterno,
+        apellido_materno,
+        email
+    };
+};

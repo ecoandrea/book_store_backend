@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'; //bcrypts usa algoritmo de rondas
+import * as bcrypt from 'bcrypt'; //bcrypts usa algoritmo de rondas
 import { InternalServerError } from '../../errors/TypeError.js';
 
 const SALT_ROUND = 10;

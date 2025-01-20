@@ -1,8 +1,9 @@
-import { InternalServerError } from '../../errors/TypeError.js';
 import { destructuringUserData, normalizeUserData } from '../../utils/normalize/user.js';
-import { ensureEmailNotTaken } from '../../utils/validators/model.js';
+import { ensureEmailNotTaken } from '../../utils/validators/models.js';
+import { hashPassword } from './hash.service.js';
 import { validatePassword } from '../../utils/validators/password.js';
-import { hashPassword } from '../password/hash.services.js';
+import { InternalServerError } from '../../errors/TypeError.js';
+
 
 export const registerService = async(data, Model) => {
     try {
